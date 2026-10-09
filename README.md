@@ -1,48 +1,34 @@
 # PremakeOpenGLExample
 
-A small C++ OpenGL example project built with Premake. This repository demonstrates how to organize a Visual Studio solution, configure third-party libraries, and manage multiple projects through modular Lua build scripts.
+A collection of small C++ and OpenGL examples built with Premake. This repository demonstrates how to organize a Visual Studio solution and configure multiple projects and third-party libraries using modular Lua build scripts.
 
 ## Overview
 
-The project uses **Premake** to generate Visual Studio project files and provides a simple OpenGL application using GLFW and GLAD.
-
-The repository is designed to demonstrate a clean, extensible project structure where application projects and third-party libraries are configured independently.
+The project uses Premake to generate Visual Studio project files. It provides two example applications and keeps third-party dependencies in separate projects.
 
 ### Features
 
-* **Premake build system** – Generate Visual Studio solutions from Lua scripts.
-* **Modular project configuration** – Separate Premake scripts for examples and vendor libraries.
-* **OpenGL 4.6** – Create an OpenGL core-profile context.
-* **GLFW** – Handle window creation, input, and event processing.
-* **GLAD** – Load OpenGL functions.
-* **GLM** – Provide a header-only mathematics library.
-* **Multiple build configurations** – Debug, Release, and Dist.
-* **Organized Visual Studio solution** – Group examples and third-party libraries separately.
+* **Premake** – Generate Visual Studio solutions from Lua scripts.
+* **Modular configuration** – Separate scripts for examples and third-party libraries.
+* **OpenGL** – Create windows and render graphics using OpenGL.
+* **GLFW** – Window creation, input, and event processing.
+* **GLAD** – OpenGL function loading.
+* **GLM** – Mathematics library for graphics programming.
+* **C++20** – Use modern C++ language features.
+* **Multiple configurations** – Debug, Release, and Dist.
 
 ## Project Structure
 
 ```text
 PremakeOpenGLExample/
 ├── Examples/
-│   ├── premake5.lua
-│   └── HelloWindow/
-│       ├── premake5.lua
-│       ├── include/
-│       └── src/
-│           └── main.cpp
+│   ├── HelloWindow/
+│   └── HelloTriangle/
 ├── Vendor/
 │   ├── premake/
-│   │   └── bin/
-│   │       └── premake5.exe
 │   ├── glfw/
-│   │   └── premake5.lua
 │   ├── glad/
-│   │   └── premake5.lua
-│   ├── glm/
-│   │   └── premake5.lua
-│   └── premake5.lua
-├── DebugDir/
-├── build/                 # Generated project files
+│   └── glm/
 ├── .gitattributes
 ├── .gitignore
 ├── README.md
@@ -50,14 +36,12 @@ PremakeOpenGLExample/
 └── premake5.lua
 ```
 
-*Note: The tree above illustrates the intended project layout. Third-party libraries contain additional source files and headers.*
-
 ## Requirements
 
 * Windows
 * Visual Studio with the C++ development tools and a compatible Windows SDK
 * The Premake executable included in the repository
-* A graphics driver supporting OpenGL 4.6 for the `HelloWindow` example
+* A graphics driver compatible with the OpenGL version requested by the example
 
 ## Getting Started
 
@@ -70,109 +54,95 @@ cd PremakeOpenGLExample
 
 ### 2. Generate the Visual Studio solution
 
-Run the provided batch script:
+Run the batch script from the repository root:
 
 ```bat
 RUNpremake.bat
 ```
 
-The script creates `DebugDir` if necessary and invokes the bundled Premake executable to generate the Visual Studio projects.
+This creates the working directory if necessary and runs Premake to generate the Visual Studio solution.
 
-Alternatively, run Premake manually from the repository root:
+Alternatively, invoke Premake directly:
 
 ```bat
 Vendor\premake\bin\premake5.exe vs2026
 ```
 
-The generated solution is located in:
-
-```text
-build/PremakeOpenGLExample.sln
-```
-
-Open the solution in a compatible version of Visual Studio.
+The generated solution is located in the `build/` directory.
 
 ### 3. Build and run
 
-Select the desired configuration and build the solution.
+Open the generated solution in Visual Studio.
 
-The `HelloWindow` project is configured as the startup project. Press **F5** to launch it with the Visual Studio debugger, or **Ctrl+F5** to run without debugging.
+Select a project, choose the desired configuration, and build the solution. Run the selected application using **F5** to start it with the debugger.
 
-The application creates an OpenGL window and clears the framebuffer with a background color. Press **Escape** to close the window.
+## Examples
+
+### HelloWindow
+
+A minimal application demonstrating how to create and manage a window using GLFW and initialize OpenGL.
+
+### HelloTriangle
+
+An OpenGL example focused on rendering a triangle. It serves as a starting point for experimenting with shaders, buffers, and the graphics pipeline.
 
 ## Build Configurations
 
 The workspace defines three configurations:
 
-| Configuration | Purpose                                                                                   |
-| ------------- | ----------------------------------------------------------------------------------------- |
-| `Debug`       | Development builds with debug symbols and the debug runtime.                              |
-| `Release`     | Optimized builds that retain debug symbols for troubleshooting.                           |
-| `Dist`        | Distribution builds with full optimization, link-time optimization, and no debug symbols. |
-
-The `HelloWindow` project uses a console application in Debug mode so that diagnostic output remains visible. Release and Dist use the Windows application subsystem.
+| Configuration | Purpose                                                                    |
+| ------------- | -------------------------------------------------------------------------- |
+| `Debug`       | Development builds with debug symbols and a console for diagnostic output. |
+| `Release`     | Optimized builds that retain debug symbols for troubleshooting.            |
+| `Dist`        | Distribution builds with stronger optimization and no debug symbols.       |
 
 ## Build Output
 
-Generated project files, intermediate objects, and compiled binaries are kept separate from the source files.
+Generated project files and compiled output are kept separate from the source code.
 
-| Directory    | Purpose                                                                     |
-| ------------ | --------------------------------------------------------------------------- |
-| `build/`     | Generated Visual Studio solution and project files.                         |
-| `build/obj/` | Intermediate compiler output, organized by configuration and project.       |
-| `build/bin/` | Compiled executables and libraries, organized by configuration and project. |
-| `DebugDir/`  | Working directory used when launching applications from Visual Studio.      |
+| Directory    | Purpose                                                                |
+| ------------ | ---------------------------------------------------------------------- |
+| `build/`     | Generated Visual Studio solution and project files.                    |
+| `build/bin/` | Compiled executables and libraries.                                    |
+| `build/obj/` | Intermediate compiler output.                                          |
+| `DebugDir/`  | Working directory used when launching applications from Visual Studio. |
 
-The generated `build/` and `bin/` directories are excluded from version control.
+Generated build artifacts are excluded from version control.
 
 ## Premake Architecture
 
-The project uses a root Premake script that defines the workspace and shared build settings. Individual directories provide their own `premake5.lua` files, keeping each project configuration close to its source files.
+The build configuration is split into multiple Lua scripts to keep the repository easy to extend.
 
 ### Root configuration
 
-The root `premake5.lua` defines:
-
-* Workspace name and build configurations
-* Target architecture
-* C++20 language standard
-* Compiler warnings and conformance settings
-* Runtime library settings
-* Output directories
-* Platform-specific definitions and compiler options
-
-It then includes the vendor libraries and example projects.
+The root `premake5.lua` defines the workspace, common compiler settings, build configurations, and output directories. It then includes the vendor projects and examples.
 
 ### Vendor projects
 
-`Vendor/premake5.lua` includes the individual library configurations.
+Each third-party library has its own Premake configuration.
 
-* **GLFW** – Configured as a static library.
-* **GLAD** – Configured as a static library.
-* **GLM** – Configured as a header-only utility project.
+* **GLFW** is built as a static library.
+* **GLAD** is built as a static library.
+* **GLM** is configured as a header-only utility project.
 
-Each library has its own Premake script, making it possible to manage its source files, include directories, and platform-specific settings independently.
+This keeps dependency configuration separate from the example applications.
 
 ### Example projects
 
-`Examples/premake5.lua` groups application examples under the `Examples` filter in Visual Studio.
+The `Examples/` directory contains independent applications. Each example has its own Premake script and inherits common settings from the root workspace.
 
-Each example has its own directory and Premake configuration. The root workspace settings are inherited automatically, while project-specific settings remain local to the example.
-
-This approach makes it straightforward to add further examples without putting every project configuration into a single Lua file.
+The `Examples/premake5.lua` script groups the examples in Visual Studio, while `Vendor/premake5.lua` groups the third-party libraries.
 
 ## Adding a New Example
 
-To add another application:
-
 1. Create a new directory under `Examples/`.
-2. Add the project's source files and headers.
-3. Create a `premake5.lua` file that defines the project, its files, include directories, and required libraries.
-4. Add an `include` statement for the new project to `Examples/premake5.lua`.
-5. Regenerate the Visual Studio solution using `RUNpremake.bat`.
+2. Add the source files and headers for the application.
+3. Create a `premake5.lua` file for the new project.
+4. Add an `include` statement to `Examples/premake5.lua`.
+5. Regenerate the solution by running `RUNpremake.bat`.
 
-Premake evaluates the file patterns when generating the projects. Regenerate the solution whenever you add or remove source files or change the build configuration.
+Premake evaluates file patterns when generating project files, so regenerate the solution whenever files are added or removed.
 
 ## License
 
-This repository incorporates third-party libraries, each of which is distributed under its own license. Refer to the respective library's license for its terms and conditions.
+This repository incorporates third-party libraries that may be distributed under different licenses. Refer to the respective library's license files for their terms and conditions.
