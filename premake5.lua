@@ -40,7 +40,7 @@ workspace "PremakeOpenGLExample"
     -- Output folders. Tokens are resolved per configuration and project:
     --   %{cfg.buildcfg} = Debug / Release / Dist
     --   %{prj.name}     = name of the project being built
-    targetdir "bin/%{cfg.buildcfg}/%{prj.name}"       -- final .exe / .lib
+    targetdir "build/bin/%{cfg.buildcfg}/%{prj.name}" -- final .exe / .lib
     objdir    "build/obj/%{cfg.buildcfg}/%{prj.name}" -- intermediate .obj files
 
     -- ---- Conditional settings --------------------------------------------

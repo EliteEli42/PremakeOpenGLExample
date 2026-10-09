@@ -43,7 +43,6 @@ PremakeOpenGLExample/
 │   └── premake5.lua
 ├── DebugDir/
 ├── build/                 # Generated project files
-├── bin/                   # Compiled executables and libraries
 ├── .gitattributes
 ├── .gitignore
 ├── README.md
@@ -121,7 +120,7 @@ Generated project files, intermediate objects, and compiled binaries are kept se
 | ------------ | --------------------------------------------------------------------------- |
 | `build/`     | Generated Visual Studio solution and project files.                         |
 | `build/obj/` | Intermediate compiler output, organized by configuration and project.       |
-| `bin/`       | Compiled executables and libraries, organized by configuration and project. |
+| `build/bin/` | Compiled executables and libraries, organized by configuration and project. |
 | `DebugDir/`  | Working directory used when launching applications from Visual Studio.      |
 
 The generated `build/` and `bin/` directories are excluded from version control.
