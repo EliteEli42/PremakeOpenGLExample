@@ -5,7 +5,7 @@
 -- Workspace-wide settings are inherited from the root script.
 -- ============================================================================
 
-project(glfw)
+project "glfw"
     kind "StaticLib"
     language "C"
     systemversion "latest"

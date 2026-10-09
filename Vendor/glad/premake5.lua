@@ -5,7 +5,7 @@
 -- Workspace-wide settings are inherited from the root script.
 -- ============================================================================
 
-project(glad)
+project "glad"
     kind "StaticLib"
     language "C"
 

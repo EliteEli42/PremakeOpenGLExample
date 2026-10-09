@@ -5,7 +5,7 @@
 -- Workspace-wide settings are inherited from the root script.
 -- ============================================================================
 
-project(glm)
+project "glm"
     kind "Utility"
     language "C++"
 
