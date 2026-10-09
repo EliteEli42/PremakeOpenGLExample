@@ -12,7 +12,7 @@ workspace "PremakeOpenGLExample"
     configurations { "Debug", "Release", "Dist" }
     architecture "x86_64"                 -- 64-bit only
     location "build"                      -- generated solution/project files go here
-    startproject "PremakeOpenGLExample"   -- project that starts with F5
+    startproject "Example"                -- project that starts with F5
 
     -- Working directory used when debugging from Visual Studio.
     -- %{wks.basedir} = folder of this script. The folder must exist
@@ -73,7 +73,6 @@ workspace "PremakeOpenGLExample"
         symbols "Off"               -- no debug info in the shipped build
         linktimeoptimization "On"   -- whole-program optimization (/GL, /LTCG);
                                     -- slower build, faster/smaller result
-        fatalwarnings { "All" }     -- every warning becomes an error (/WX)
 
     filter {}                       -- reset: following settings apply to all again
 
@@ -82,3 +81,5 @@ workspace "PremakeOpenGLExample"
 -- relative to their own folder. Must come AFTER the workspace block above
 -- so the projects belong to it and inherit its settings.
 include "vendor"
+
+include "Example"
