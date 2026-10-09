@@ -5,16 +5,14 @@
 -- Workspace-wide settings are inherited from the root script.
 -- ============================================================================
 
-local name = "glfw"
-
-project(name)
+project(glfw)
     kind "StaticLib"
     language "C"
     systemversion "latest"
 
     -- Public headers.
     files {
-        "include/GLFW/**.h"
+        "include/glfw/**.h"
     }
 
     -- Common internal headers.
@@ -137,7 +135,7 @@ project(name)
 
     vpaths {
         ["Header Files/*"] = {
-            "include/**"
+            "include/glfw/**"
         },
         ["Source Files/*"] = {
             "src/**"

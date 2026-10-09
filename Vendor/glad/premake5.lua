@@ -5,9 +5,7 @@
 -- Workspace-wide settings are inherited from the root script.
 -- ============================================================================
 
-local name = "glad"
-
-project(name)
+project(glad)
     kind "StaticLib"
     language "C"
 
@@ -28,5 +26,7 @@ project(name)
             "include/glad/**",
             "include/KHR/**" 
         },
-        ["Source Files/*"] = "src/**"
+        ["Source Files/*"] = {
+            "src/**"
+        }
     }

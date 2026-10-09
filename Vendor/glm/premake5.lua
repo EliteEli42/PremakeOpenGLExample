@@ -5,9 +5,7 @@
 -- Workspace-wide settings are inherited from the root script.
 -- ============================================================================
 
-local name = "glm"
-
-project(name)
+project(glm)
     kind "Utility"
     language "C++"
 
@@ -25,6 +23,10 @@ project(name)
 
     -- Visual Studio filters.
     vpaths {
-        ["Header Files/*"] = "include/" .. name .. "/**.h*",
-        ["Source Files/*"] = "include/" .. name .. "/**"
+        ["Header Files/*"] = {
+            "include/glm/**.h"
+        },
+        ["Source Files/*"] = {
+            "include/glm/**"
+        }
     }
