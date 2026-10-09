@@ -1,10 +1,10 @@
 -- ============================================================================
 -- Root Premake script. Run `premake5 vs2026` in this folder to generate the
--- Visual Studio solution in ./build (open build/PremakeOpenGLExmaple.sln afterwards).
+-- Visual Studio solution in ./build (open build/PremakeOpenGLExample.sln afterwards).
 -- Re-run it whenever files are added/removed or any .lua file is changed.
 -- ============================================================================
 
-workspace "PremakeOpenGLExmaple"
+workspace "PremakeOpenGLExample"
     -- Build configurations that show up in Visual Studio's dropdown.
     --   Debug   = development, no optimization, full debug info
     --   Release = optimized, but still with symbols/logging for testing
@@ -12,7 +12,7 @@ workspace "PremakeOpenGLExmaple"
     configurations { "Debug", "Release", "Dist" }
     architecture "x86_64"                 -- 64-bit only
     location "build"                      -- generated solution/project files go here
-    startproject "PremakeOpenGLExmaple"   -- project that starts with F5
+    startproject "PremakeOpenGLExample"   -- project that starts with F5
 
     -- Working directory used when debugging from Visual Studio.
     -- %{wks.basedir} = folder of this script. The folder must exist
@@ -81,4 +81,4 @@ workspace "PremakeOpenGLExmaple"
 -- Each line loads <folder>/premake5.lua. Paths inside those files are
 -- relative to their own folder. Must come AFTER the workspace block above
 -- so the projects belong to it and inherit its settings.
-include "Vendor"
+include "vendor"

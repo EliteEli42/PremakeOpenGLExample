@@ -1,2 +1,2 @@
-# PremakeOpenGLExmaple
+# PremakeOpenGLExample
 
