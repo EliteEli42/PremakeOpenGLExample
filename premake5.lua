@@ -81,5 +81,4 @@ workspace "PremakeOpenGLExmaple"
 -- Each line loads <folder>/premake5.lua. Paths inside those files are
 -- relative to their own folder. Must come AFTER the workspace block above
 -- so the projects belong to it and inherit its settings.
-include "hello"                     -- static library
-include "HelloWorld"                -- console application (links against hello)
+include "Vendor"

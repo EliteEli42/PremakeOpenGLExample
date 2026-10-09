@@ -1,2 +1,2 @@
-premake5 vs2026
+.\Vendor\premake\bin\premake5.exe vs2026
 pause
