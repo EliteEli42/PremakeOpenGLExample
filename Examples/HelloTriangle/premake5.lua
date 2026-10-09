@@ -1,4 +1,4 @@
-local name = "HelloWindow"
+local name = "HelloTriangle"
 
 project(name)
     -- Application type per configuration.
