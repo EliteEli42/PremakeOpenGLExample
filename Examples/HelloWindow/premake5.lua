@@ -19,9 +19,7 @@ project(name)
         "src/**"
     }
 
-    -- Include search paths (used for #include "..." and #include <...>).
-    -- Without "include" here, the project cannot find its own headers in
-    -- include/<name>/, e.g. #include "HelloWorld/HelloWorld.h".
+    -- Add the project's own include directory so its headers can be found.
     includedirs {
         "include",                          -- own headers
     }

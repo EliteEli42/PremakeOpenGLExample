@@ -14,7 +14,7 @@ workspace "PremakeOpenGLExample"
     configurations { "Debug", "Release", "Dist" }
     architecture "x86_64"                 -- 64-bit only
     location "build"                      -- generated solution/project files go here
-    startproject "Example"                -- project that starts with F5
+    startproject "HelloWindow"            -- project that starts with F5
 
     -- Working directory used when debugging from Visual Studio.
     -- %{wks.basedir} = folder of this script. The folder must exist

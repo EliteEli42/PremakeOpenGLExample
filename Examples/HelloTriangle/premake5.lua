@@ -19,9 +19,7 @@ project(name)
         "src/**"
     }
 
-    -- Include search paths (used for #include "..." and #include <...>).
-    -- Without "include" here, the project cannot find its own headers in
-    -- include/<name>/, e.g. #include "HelloWorld/HelloWorld.h".
+    -- Add the project's own include directory so its headers can be found.
     includedirs {
         "include",                          -- own headers
     }
@@ -40,8 +38,8 @@ project(name)
     -- How files are grouped in Visual Studio's Solution Explorer.
     -- Only the part after the fixed prefix of the pattern is kept as folders,
     -- so subfolders automatically become filters.
-    --   include/HelloWorld/utils/x.h -> Header Files/utils/x.h
-    --   src/utils/x.cpp              -> Source Files/utils/x.cpp
+    --   include/HelloTriangle/utils/x.h -> Header Files/utils/x.h
+    --   src/utils/x.cpp                 -> Source Files/utils/x.cpp
     vpaths {
         ["Header Files/*"] = "include/" .. name .. "/**",
         ["Source Files/*"] = "src/**"

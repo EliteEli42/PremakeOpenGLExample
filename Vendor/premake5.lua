@@ -8,5 +8,5 @@ group "Vendor"
     include "glad"
     include "glm"
 
-    -- Reset the group so subsequent projects are not added to Examples.
+    -- Reset the group so subsequent projects are not added to Vendor.
 group ""
