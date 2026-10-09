@@ -4,6 +4,8 @@
 -- Re-run it whenever files are added/removed or any .lua file is changed.
 -- ============================================================================
 
+SolutionRoot = _SCRIPT_DIR
+
 workspace "PremakeOpenGLExample"
     -- Build configurations that show up in Visual Studio's dropdown.
     --   Debug   = development, no optimization, full debug info
@@ -76,10 +78,10 @@ workspace "PremakeOpenGLExample"
 
     filter {}                       -- reset: following settings apply to all again
 
--- ---- Projects --------------------------------------------------------------
--- Each line loads <folder>/premake5.lua. Paths inside those files are
--- relative to their own folder. Must come AFTER the workspace block above
--- so the projects belong to it and inherit its settings.
-include "vendor"
+    -- ---- Projects --------------------------------------------------------------
+    -- Each line loads <folder>/premake5.lua. Paths inside those files are
+    -- relative to their own folder. Must come AFTER the workspace block above
+    -- so the projects belong to it and inherit its settings.
+    include "Vendor"
 
-include "Example"
+    include "Examples"

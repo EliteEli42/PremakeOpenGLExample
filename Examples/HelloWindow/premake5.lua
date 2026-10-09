@@ -6,7 +6,7 @@
 -- inherited from the root script.
 -- ============================================================================
 
-local name = "Example"
+local name = "HelloWindow"
 
 project(name)
     -- Application type per configuration.
@@ -35,9 +35,9 @@ project(name)
     }
 
     externalincludedirs {
-        "../vendor/glad/include",           -- headers of the glad library
-        "../vendor/glfw/include",           -- headers of the glfw library
-        "../vendor/glm/include"             -- headers of the glm library
+        path.join(SolutionRoot, "Vendor/glad/include"),
+        path.join(SolutionRoot, "Vendor/glfw/include"),
+        path.join(SolutionRoot, "Vendor/glm/include")
     }
     
     links { 

@@ -1,12 +1,10 @@
 -- ============================================================================
--- Group: Vendor
+-- Group: Examples
 -- ============================================================================
 
-group "Vendor"
+group "Examples"
 
-    include "glfw"
-    include "glad"
-    include "glm"
+    include "HelloWindow"
 
     -- Reset the group so subsequent projects are not added to Examples.
 group ""
