@@ -2,10 +2,13 @@ local name = "HelloWindow"
 
 project(name)
     -- Application type per configuration.
-    filter "configurations:Debug"
-        kind "ConsoleApp"                   -- console window (see std::cout output)
-
-    filter "configurations:not Debug"       -- Release and Dist
+    kind "ConsoleApp"
+        
+    -- Windows Release and Dist use the GUI subsystem.
+    filter {
+        "system:windows",
+        "configurations:not Debug"
+    }
         kind "WindowedApp"                  -- Windows subsystem (no console window)
         entrypoint "mainCRTStartup"         -- keep plain main() as entry point
                                             -- (otherwise the linker wants WinMain)

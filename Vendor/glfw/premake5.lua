@@ -1,29 +1,22 @@
 -- ============================================================================
--- Project: glfw (static library)
--- Loaded from the root premake5.lua via `include "glfw"`.
--- Paths in this file are relative to this folder (glfw/).
--- Workspace-wide settings are inherited from the root script.
+-- Project: GLFW
 -- ============================================================================
 
 project "glfw"
     kind "StaticLib"
     language "C"
-    systemversion "latest"
 
-    -- Public headers.
+    -- Common public headers.
     files {
         "include/glfw/**.h"
     }
 
-    -- Common internal headers.
+    -- Common internal headers and implementation.
     files {
         "src/internal.h",
         "src/platform.h",
-        "src/mappings.h"
-    }
+        "src/mappings.h",
 
-    -- Common implementation.
-    files {
         "src/context.c",
         "src/init.c",
         "src/input.c",
@@ -32,11 +25,9 @@ project "glfw"
         "src/vulkan.c",
         "src/window.c",
         "src/egl_context.c",
-        "src/osmesa_context.c"
-    }
+        "src/osmesa_context.c",
 
-    -- Null platform backend (headless).
-    files {
+        -- Null platform backend.
         "src/null_platform.h",
         "src/null_joystick.h",
         "src/null_init.c",
@@ -45,13 +36,14 @@ project "glfw"
         "src/null_joystick.c"
     }
 
-    -- Public include directory.
     includedirs {
         "include"
     }
 
     -- Windows backend.
     filter "system:windows"
+        systemversion "latest"
+
         defines {
             "_GLFW_WIN32",
             "_GLFW_WGL"
@@ -76,7 +68,7 @@ project "glfw"
             "shell32"
         }
 
-    -- Linux backend (X11).
+    -- Linux backend using X11 and GLX.
     filter "system:linux"
         defines {
             "_GLFW_X11",
@@ -91,6 +83,7 @@ project "glfw"
             "src/x11_window.c",
             "src/xkb_unicode.c",
             "src/posix_module.c",
+            "src/posix_poll.c",
             "src/posix_time.c",
             "src/posix_thread.c",
             "src/glx_context.c",
@@ -99,8 +92,15 @@ project "glfw"
 
         links {
             "X11",
+            "Xrandr",
+            "Xinerama",
+            "Xcursor",
+            "Xi",
+            "Xxf86vm",
+            "GL",
             "dl",
-            "pthread"
+            "pthread",
+            "m"
         }
 
     -- macOS backend.
@@ -119,6 +119,7 @@ project "glfw"
             "src/cocoa_window.m",
             "src/cocoa_time.c",
             "src/posix_module.c",
+            "src/posix_poll.c",
             "src/posix_thread.c",
             "src/nsgl_context.m"
         }
@@ -130,9 +131,9 @@ project "glfw"
             "QuartzCore.framework"
         }
 
-    -- Visual Studio filters.
     filter {}
 
+    -- Visual Studio filters.
     vpaths {
         ["Header Files/*"] = {
             "include/glfw/**"
