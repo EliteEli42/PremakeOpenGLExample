@@ -82,6 +82,27 @@ workspace "PremakeOpenGLExample"
     -- Each line loads <folder>/premake5.lua. Paths inside those files are
     -- relative to their own folder. Must come AFTER the workspace block above
     -- so the projects belong to it and inherit its settings.
+
+    -- Automatically mirror project script directories inside build/.
+    -- Example: Examples/HelloWindow -> build/Examples/HelloWindow
+
+    local originalProject = project
+
+    function project(name)
+        -- Create the project normally.
+        originalProject(name)
+
+        -- Determine the directory of the currently executing project script.
+        local projectDir = path.getrelative(SolutionRoot, _SCRIPT_DIR)
+
+        -- Keep projects defined directly in the repository root in build/.
+        if projectDir == "." then
+            location(path.join(SolutionRoot, "build"))
+        else
+            location(path.join(SolutionRoot, "build/Projects", projectDir))
+        end
+    end
+
     include "Vendor"
 
     include "Examples"
